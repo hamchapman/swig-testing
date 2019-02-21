@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println(myDB.getName()); // prints out "testing"
 
-        // myDB.getFPtr("hello"); // doesn't work - says that no arguments are expected
+//         myDB.getFPtr("hello"); // doesn't work - says that no arguments are expected
 
         SWIGTYPE_p_f_p_q_const__char__int myFunc = myDB.getFPtr();
-        myFunc("hello"); // same error as above - doesn't expect any arguments
+//        myFunc("hello"); // error about "Method call expected"
     }
 }
