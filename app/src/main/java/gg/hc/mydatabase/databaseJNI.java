@@ -11,9 +11,10 @@ package gg.hc.mydatabase;
 public class databaseJNI {
   public final static native void MyDatabase_name_set(long jarg1, String jarg2);
   public final static native String MyDatabase_name_get(long jarg1);
-  public final static native void MyDatabase_fPtr_set(long jarg1, long jarg2);
-  public final static native long MyDatabase_fPtr_get(long jarg1);
+  public final static native int MyDatabase_fPtr(long jarg1, String jarg3);
+  public final static native int MyDatabase_callFPtr(long jarg1, String jarg2);
   public final static native long new_database(String jarg1);
+  public final static native int call_database_fPtr(long jarg1, String jarg2);
   public final static native long new_MyDatabaseHandle();
   public final static native long copy_MyDatabaseHandle(long jarg1);
   public final static native void delete_MyDatabaseHandle(long jarg1);

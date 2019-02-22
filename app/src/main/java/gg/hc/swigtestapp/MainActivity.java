@@ -21,13 +21,19 @@ public class MainActivity extends AppCompatActivity {
 
         SWIGTYPE_p_MyDatabase myDBPtr = database.new_database("testing");
 
+        System.out.println(database.call_database_fPtr(myDBPtr, "mydatabasename"));
+
         MyDatabase myDB = database.MyDatabaseHandle_value(myDBPtr);
 
-        System.out.println(myDB.getName()); // prints out "testing"
+        System.out.println(myDB.callFPtr("ham_testing"));
 
-//         myDB.getFPtr("hello"); // doesn't work - says that no arguments are expected
+        System.out.println(myDB.fPtr("ham_testing_longer"));
+//
+//        System.out.println(myDB.getName()); // prints out "testing"
 
-        SWIGTYPE_p_f_p_q_const__char__int myFunc = myDB.getFPtr();
+//        myDB.getFPtr("hello"); // doesn't work - says that no arguments are expected
+
+//        SWIGTYPE_p_f_p_q_const__char__int myFunc = myDB.getFPtr();
 //        myFunc("hello"); // error about "Method call expected"
     }
 }

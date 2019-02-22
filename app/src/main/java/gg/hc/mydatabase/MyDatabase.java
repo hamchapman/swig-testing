@@ -39,13 +39,12 @@ public class MyDatabase {
     return databaseJNI.MyDatabase_name_get(swigCPtr);
   }
 
-  public void setFPtr(SWIGTYPE_p_f_p_q_const__char__int value) {
-    databaseJNI.MyDatabase_fPtr_set(swigCPtr, SWIGTYPE_p_f_p_q_const__char__int.getCPtr(value));
+  public int fPtr(String arg1) {
+    return databaseJNI.MyDatabase_fPtr(swigCPtr, arg1);
   }
 
-  public SWIGTYPE_p_f_p_q_const__char__int getFPtr() {
-    long cPtr = databaseJNI.MyDatabase_fPtr_get(swigCPtr);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_f_p_q_const__char__int(cPtr, false);
+  public int callFPtr(String name) {
+    return databaseJNI.MyDatabase_callFPtr(swigCPtr, name);
   }
 
 }

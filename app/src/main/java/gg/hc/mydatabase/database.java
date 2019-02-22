@@ -14,6 +14,10 @@ public class database {
     return (cPtr == 0) ? null : new SWIGTYPE_p_MyDatabase(cPtr, false);
   }
 
+  public static int call_database_fPtr(SWIGTYPE_p_MyDatabase db, String name) {
+    return databaseJNI.call_database_fPtr(SWIGTYPE_p_MyDatabase.getCPtr(db), name);
+  }
+
   public static SWIGTYPE_p_MyDatabase new_MyDatabaseHandle() {
     long cPtr = databaseJNI.new_MyDatabaseHandle();
     return (cPtr == 0) ? null : new SWIGTYPE_p_MyDatabase(cPtr, false);

@@ -21,8 +21,8 @@ swig -java -package gg.hc.mydatabase -outdir app/src/main/java/gg/hc/mydatabase 
 ANDROID_ARCHS=( aarch64 armv7 x86 x86_64 )
 ANDROID_ARCH_TARGETS=( aarch64-linux-android armv7a-linux-androideabi i686-linux-android x86_64-linux-android )
 for i in "${!ANDROID_ARCH_TARGETS[@]}"; do
-    rm libdatabase.so
-    rm database.lo database_android.lo
+    rm -f libdatabase.so
+    rm -f database.lo database_android.lo
 
     ANDROID_TARGET="${ANDROID_ARCH_TARGETS[$i]}"
     ANDROID_ARCH="${ANDROID_ARCHS[$i]}"

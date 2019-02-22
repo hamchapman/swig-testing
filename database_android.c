@@ -208,6 +208,9 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 
 #include "database.h"
 
+SWIGINTERN int MyDatabase_callFPtr(struct MyDatabase *self,char const *name){
+    return (*(self->fPtr))(self, name);
+  }
 
 static MyDatabase *new_MyDatabaseHandle() { 
   return (MyDatabase *) calloc(1,sizeof(MyDatabase)); 
@@ -275,28 +278,49 @@ SWIGEXPORT jstring JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1name_1g
 }
 
 
-SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1fPtr_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jlong jarg2) {
+SWIGEXPORT jint JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1fPtr(JNIEnv *jenv, jclass jcls, jlong jarg1, jstring jarg3) {
+  jint jresult = 0 ;
   struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
-  SomeFuncPtr arg2 = (SomeFuncPtr) 0 ;
+  struct MyDatabase *arg2 = (struct MyDatabase *) 0 ;
+  char *arg3 = (char *) 0 ;
+  int result;
   
   (void)jenv;
   (void)jcls;
+  arg2=NULL;
   arg1 = *(struct MyDatabase **)&jarg1; 
-  arg2 = *(SomeFuncPtr *)&jarg2; 
-  if (arg1) (arg1)->fPtr = arg2;
+  arg3 = 0;
+  if (jarg3) {
+    arg3 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg3, 0);
+    if (!arg3) return 0;
+  }
+  {
+    arg2 = arg1;
+  }
+  result = (int)(arg1)->fPtr(arg2,(char const *)arg3);
+  jresult = (jint)result; 
+  if (arg3) (*jenv)->ReleaseStringUTFChars(jenv, jarg3, (const char *)arg3);
+  return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1fPtr_1get(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  jlong jresult = 0 ;
+SWIGEXPORT jint JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1callFPtr(JNIEnv *jenv, jclass jcls, jlong jarg1, jstring jarg2) {
+  jint jresult = 0 ;
   struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
-  SomeFuncPtr result;
+  char *arg2 = (char *) 0 ;
+  int result;
   
   (void)jenv;
   (void)jcls;
   arg1 = *(struct MyDatabase **)&jarg1; 
-  result = (SomeFuncPtr) ((arg1)->fPtr);
-  *(SomeFuncPtr *)&jresult = result; 
+  arg2 = 0;
+  if (jarg2) {
+    arg2 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg2, 0);
+    if (!arg2) return 0;
+  }
+  result = (int)MyDatabase_callFPtr(arg1,(char const *)arg2);
+  jresult = (jint)result; 
+  if (arg2) (*jenv)->ReleaseStringUTFChars(jenv, jarg2, (const char *)arg2);
   return jresult;
 }
 
@@ -316,6 +340,27 @@ SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_new_1database(JNIEnv 
   result = (struct MyDatabase *)new_database(arg1);
   *(struct MyDatabase **)&jresult = result; 
   if (arg1) (*jenv)->ReleaseStringUTFChars(jenv, jarg1, (const char *)arg1);
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_gg_hc_mydatabase_databaseJNI_call_1database_1fPtr(JNIEnv *jenv, jclass jcls, jlong jarg1, jstring jarg2) {
+  jint jresult = 0 ;
+  struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
+  char *arg2 = (char *) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(struct MyDatabase **)&jarg1; 
+  arg2 = 0;
+  if (jarg2) {
+    arg2 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg2, 0);
+    if (!arg2) return 0;
+  }
+  result = (int)call_database_fPtr(arg1,(char const *)arg2);
+  jresult = (jint)result; 
+  if (arg2) (*jenv)->ReleaseStringUTFChars(jenv, jarg2, (const char *)arg2);
   return jresult;
 }
 
