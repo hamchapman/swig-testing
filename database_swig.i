@@ -21,4 +21,5 @@
 %include "database.h"
 
 %include "cpointer.i"
-%pointer_functions(MyDatabase, MyDatabaseHandle)
+%pointer_functions(struct MyDatabase, MyDatabaseHandle)
+%pointer_functions(struct MyCollection *, MyCollectionHandle)

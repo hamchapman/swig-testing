@@ -28,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(myDB.callFPtr("ham_testing"));
 
         System.out.println(myDB.fPtr("ham_testing_longer"));
+
+        SWIGTYPE_p_p_MyCollection collHandle = database.new_MyCollectionHandle();
+
+        System.out.println(myDB.collectionFPtr("mycollectionname", collHandle));
+
+        System.out.println(database.MyCollectionHandle_value(collHandle).getName());
+
 //
 //        System.out.println(myDB.getName()); // prints out "testing"
 

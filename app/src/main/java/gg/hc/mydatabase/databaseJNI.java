@@ -9,9 +9,14 @@
 package gg.hc.mydatabase;
 
 public class databaseJNI {
+  public final static native void MyCollection_name_set(long jarg1, MyCollection jarg1_, String jarg2);
+  public final static native String MyCollection_name_get(long jarg1, MyCollection jarg1_);
+  public final static native long new_MyCollection();
+  public final static native void delete_MyCollection(long jarg1);
   public final static native void MyDatabase_name_set(long jarg1, String jarg2);
   public final static native String MyDatabase_name_get(long jarg1);
   public final static native int MyDatabase_fPtr(long jarg1, String jarg3);
+  public final static native int MyDatabase_collectionFPtr(long jarg1, String jarg3, long jarg4);
   public final static native int MyDatabase_callFPtr(long jarg1, String jarg2);
   public final static native long new_database(String jarg1);
   public final static native int call_database_fPtr(long jarg1, String jarg2);
@@ -20,4 +25,9 @@ public class databaseJNI {
   public final static native void delete_MyDatabaseHandle(long jarg1);
   public final static native void MyDatabaseHandle_assign(long jarg1, long jarg2);
   public final static native long MyDatabaseHandle_value(long jarg1);
+  public final static native long new_MyCollectionHandle();
+  public final static native long copy_MyCollectionHandle(long jarg1, MyCollection jarg1_);
+  public final static native void delete_MyCollectionHandle(long jarg1);
+  public final static native void MyCollectionHandle_assign(long jarg1, long jarg2, MyCollection jarg2_);
+  public final static native long MyCollectionHandle_value(long jarg1);
 }

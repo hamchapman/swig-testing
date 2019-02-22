@@ -43,6 +43,10 @@ public class MyDatabase {
     return databaseJNI.MyDatabase_fPtr(swigCPtr, arg1);
   }
 
+  public int collectionFPtr(String name, SWIGTYPE_p_p_MyCollection collection) {
+    return databaseJNI.MyDatabase_collectionFPtr(swigCPtr, name, SWIGTYPE_p_p_MyCollection.getCPtr(collection));
+  }
+
   public int callFPtr(String name) {
     return databaseJNI.MyDatabase_callFPtr(swigCPtr, name);
   }

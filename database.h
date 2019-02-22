@@ -4,7 +4,7 @@
 struct MyDatabase;
 typedef struct MyDatabase MyDatabase;
 
-// typedef int (*SomeFuncPtr)(struct MyDatabase *myDB, const char *name);
+typedef int (*SomeFuncPtr)(const struct MyDatabase *myDB, const char *name);
 
 #ifdef SWIG
 #define MEMBER(name, args) name args
@@ -12,9 +12,14 @@ typedef struct MyDatabase MyDatabase;
 #define MEMBER(name, args) (*name) args
 #endif
 
+struct MyCollection {
+  char *name;
+};
+
 struct MyDatabase {
   char *name;
-  int MEMBER(fPtr,(struct MyDatabase *myDB, const char *));
+  int MEMBER(fPtr,(const struct MyDatabase *myDB, const char *));
+  int MEMBER(collectionFPtr,(const struct MyDatabase *myDB, const char *name, const struct MyCollection **collection));
 };
 
 struct MyDatabase *new_database(char *name);

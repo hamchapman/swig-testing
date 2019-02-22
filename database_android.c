@@ -212,25 +212,48 @@ SWIGINTERN int MyDatabase_callFPtr(struct MyDatabase *self,char const *name){
     return (*(self->fPtr))(self, name);
   }
 
-static MyDatabase *new_MyDatabaseHandle() { 
-  return (MyDatabase *) calloc(1,sizeof(MyDatabase)); 
+static struct MyDatabase *new_MyDatabaseHandle() { 
+  return (struct MyDatabase *) calloc(1,sizeof(struct MyDatabase)); 
 }
 
-static MyDatabase *copy_MyDatabaseHandle(MyDatabase value) { 
-  MyDatabase *obj = (MyDatabase *) calloc(1,sizeof(MyDatabase));
+static struct MyDatabase *copy_MyDatabaseHandle(struct MyDatabase value) { 
+  struct MyDatabase *obj = (struct MyDatabase *) calloc(1,sizeof(struct MyDatabase));
   *obj = value;
   return obj; 
 }
 
-static void delete_MyDatabaseHandle(MyDatabase *obj) { 
+static void delete_MyDatabaseHandle(struct MyDatabase *obj) { 
   if (obj) free(obj); 
 }
 
-static void MyDatabaseHandle_assign(MyDatabase *obj, MyDatabase value) {
+static void MyDatabaseHandle_assign(struct MyDatabase *obj, struct MyDatabase value) {
   *obj = value;
 }
 
-static MyDatabase MyDatabaseHandle_value(MyDatabase *obj) {
+static struct MyDatabase MyDatabaseHandle_value(struct MyDatabase *obj) {
+  return *obj;
+}
+
+
+static struct MyCollection * *new_MyCollectionHandle() { 
+  return (struct MyCollection * *) calloc(1,sizeof(struct MyCollection *)); 
+}
+
+static struct MyCollection * *copy_MyCollectionHandle(struct MyCollection * value) { 
+  struct MyCollection * *obj = (struct MyCollection * *) calloc(1,sizeof(struct MyCollection *));
+  *obj = value;
+  return obj; 
+}
+
+static void delete_MyCollectionHandle(struct MyCollection * *obj) { 
+  if (obj) free(obj); 
+}
+
+static void MyCollectionHandle_assign(struct MyCollection * *obj, struct MyCollection * value) {
+  *obj = value;
+}
+
+static struct MyCollection * MyCollectionHandle_value(struct MyCollection * *obj) {
   return *obj;
 }
 
@@ -238,6 +261,69 @@ static MyDatabase MyDatabaseHandle_value(MyDatabase *obj) {
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_MyCollection_1name_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+  struct MyCollection *arg1 = (struct MyCollection *) 0 ;
+  char *arg2 = (char *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(struct MyCollection **)&jarg1; 
+  arg2 = 0;
+  if (jarg2) {
+    arg2 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg2, 0);
+    if (!arg2) return ;
+  }
+  {
+    free(arg1->name);
+    if (arg2) {
+      arg1->name = (char *) malloc(strlen((const char *)arg2)+1);
+      strcpy((char *)arg1->name, (const char *)arg2);
+    } else {
+      arg1->name = 0;
+    }
+  }
+  if (arg2) (*jenv)->ReleaseStringUTFChars(jenv, jarg2, (const char *)arg2);
+}
+
+
+SWIGEXPORT jstring JNICALL Java_gg_hc_mydatabase_databaseJNI_MyCollection_1name_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jstring jresult = 0 ;
+  struct MyCollection *arg1 = (struct MyCollection *) 0 ;
+  char *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(struct MyCollection **)&jarg1; 
+  result = (char *) ((arg1)->name);
+  if (result) jresult = (*jenv)->NewStringUTF(jenv, (const char *)result);
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_new_1MyCollection(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  struct MyCollection *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (struct MyCollection *)calloc(1, sizeof(struct MyCollection));
+  *(struct MyCollection **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_delete_1MyCollection(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  struct MyCollection *arg1 = (struct MyCollection *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(struct MyCollection **)&jarg1; 
+  free((char *) arg1);
+}
+
 
 SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1name_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jstring jarg2) {
   struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
@@ -297,7 +383,35 @@ SWIGEXPORT jint JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1fPtr(JNIEn
   {
     arg2 = arg1;
   }
-  result = (int)(arg1)->fPtr(arg2,(char const *)arg3);
+  result = (int)(arg1)->fPtr((struct MyDatabase const *)arg2,(char const *)arg3);
+  jresult = (jint)result; 
+  if (arg3) (*jenv)->ReleaseStringUTFChars(jenv, jarg3, (const char *)arg3);
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabase_1collectionFPtr(JNIEnv *jenv, jclass jcls, jlong jarg1, jstring jarg3, jlong jarg4) {
+  jint jresult = 0 ;
+  struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
+  struct MyDatabase *arg2 = (struct MyDatabase *) 0 ;
+  char *arg3 = (char *) 0 ;
+  struct MyCollection **arg4 = (struct MyCollection **) 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg2=NULL;
+  arg1 = *(struct MyDatabase **)&jarg1; 
+  arg3 = 0;
+  if (jarg3) {
+    arg3 = (char *)(*jenv)->GetStringUTFChars(jenv, jarg3, 0);
+    if (!arg3) return 0;
+  }
+  arg4 = *(struct MyCollection ***)&jarg4; 
+  {
+    arg2 = arg1;
+  }
+  result = (int)(arg1)->collectionFPtr((struct MyDatabase const *)arg2,(char const *)arg3,(struct MyCollection const **)arg4);
   jresult = (jint)result; 
   if (arg3) (*jenv)->ReleaseStringUTFChars(jenv, jarg3, (const char *)arg3);
   return jresult;
@@ -367,57 +481,57 @@ SWIGEXPORT jint JNICALL Java_gg_hc_mydatabase_databaseJNI_call_1database_1fPtr(J
 
 SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_new_1MyDatabaseHandle(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  MyDatabase *result = 0 ;
+  struct MyDatabase *result = 0 ;
   
   (void)jenv;
   (void)jcls;
-  result = (MyDatabase *)new_MyDatabaseHandle();
-  *(MyDatabase **)&jresult = result; 
+  result = (struct MyDatabase *)new_MyDatabaseHandle();
+  *(struct MyDatabase **)&jresult = result; 
   return jresult;
 }
 
 
 SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_copy_1MyDatabaseHandle(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   jlong jresult = 0 ;
-  MyDatabase arg1 ;
-  MyDatabase *argp1 ;
-  MyDatabase *result = 0 ;
+  struct MyDatabase arg1 ;
+  struct MyDatabase *argp1 ;
+  struct MyDatabase *result = 0 ;
   
   (void)jenv;
   (void)jcls;
-  argp1 = *(MyDatabase **)&jarg1; 
+  argp1 = *(struct MyDatabase **)&jarg1; 
   if (!argp1) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Attempt to dereference null MyDatabase");
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Attempt to dereference null struct MyDatabase");
     return 0;
   }
   arg1 = *argp1; 
-  result = (MyDatabase *)copy_MyDatabaseHandle(arg1);
-  *(MyDatabase **)&jresult = result; 
+  result = (struct MyDatabase *)copy_MyDatabaseHandle(arg1);
+  *(struct MyDatabase **)&jresult = result; 
   return jresult;
 }
 
 
 SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_delete_1MyDatabaseHandle(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  MyDatabase *arg1 = (MyDatabase *) 0 ;
+  struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
   
   (void)jenv;
   (void)jcls;
-  arg1 = *(MyDatabase **)&jarg1; 
+  arg1 = *(struct MyDatabase **)&jarg1; 
   delete_MyDatabaseHandle(arg1);
 }
 
 
 SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabaseHandle_1assign(JNIEnv *jenv, jclass jcls, jlong jarg1, jlong jarg2) {
-  MyDatabase *arg1 = (MyDatabase *) 0 ;
-  MyDatabase arg2 ;
-  MyDatabase *argp2 ;
+  struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
+  struct MyDatabase arg2 ;
+  struct MyDatabase *argp2 ;
   
   (void)jenv;
   (void)jcls;
-  arg1 = *(MyDatabase **)&jarg1; 
-  argp2 = *(MyDatabase **)&jarg2; 
+  arg1 = *(struct MyDatabase **)&jarg1; 
+  argp2 = *(struct MyDatabase **)&jarg2; 
   if (!argp2) {
-    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Attempt to dereference null MyDatabase");
+    SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Attempt to dereference null struct MyDatabase");
     return ;
   }
   arg2 = *argp2; 
@@ -427,18 +541,82 @@ SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabaseHandle_1assi
 
 SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_MyDatabaseHandle_1value(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   jlong jresult = 0 ;
-  MyDatabase *arg1 = (MyDatabase *) 0 ;
-  MyDatabase result;
+  struct MyDatabase *arg1 = (struct MyDatabase *) 0 ;
+  struct MyDatabase result;
   
   (void)jenv;
   (void)jcls;
-  arg1 = *(MyDatabase **)&jarg1; 
+  arg1 = *(struct MyDatabase **)&jarg1; 
   result = MyDatabaseHandle_value(arg1);
   {
-    MyDatabase * resultptr = (MyDatabase *) malloc(sizeof(MyDatabase));
-    memmove(resultptr, &result, sizeof(MyDatabase));
-    *(MyDatabase **)&jresult = resultptr;
+    struct MyDatabase * resultptr = (struct MyDatabase *) malloc(sizeof(struct MyDatabase));
+    memmove(resultptr, &result, sizeof(struct MyDatabase));
+    *(struct MyDatabase **)&jresult = resultptr;
   }
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_new_1MyCollectionHandle(JNIEnv *jenv, jclass jcls) {
+  jlong jresult = 0 ;
+  struct MyCollection **result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (struct MyCollection **)new_MyCollectionHandle();
+  *(struct MyCollection ***)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_copy_1MyCollectionHandle(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
+  struct MyCollection *arg1 = (struct MyCollection *) 0 ;
+  struct MyCollection **result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg1_;
+  arg1 = *(struct MyCollection **)&jarg1; 
+  result = (struct MyCollection **)copy_MyCollectionHandle(arg1);
+  *(struct MyCollection ***)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_delete_1MyCollectionHandle(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  struct MyCollection **arg1 = (struct MyCollection **) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(struct MyCollection ***)&jarg1; 
+  delete_MyCollectionHandle(arg1);
+}
+
+
+SWIGEXPORT void JNICALL Java_gg_hc_mydatabase_databaseJNI_MyCollectionHandle_1assign(JNIEnv *jenv, jclass jcls, jlong jarg1, jlong jarg2, jobject jarg2_) {
+  struct MyCollection **arg1 = (struct MyCollection **) 0 ;
+  struct MyCollection *arg2 = (struct MyCollection *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  (void)jarg2_;
+  arg1 = *(struct MyCollection ***)&jarg1; 
+  arg2 = *(struct MyCollection **)&jarg2; 
+  MyCollectionHandle_assign(arg1,arg2);
+}
+
+
+SWIGEXPORT jlong JNICALL Java_gg_hc_mydatabase_databaseJNI_MyCollectionHandle_1value(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jlong jresult = 0 ;
+  struct MyCollection **arg1 = (struct MyCollection **) 0 ;
+  struct MyCollection *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(struct MyCollection ***)&jarg1; 
+  result = (struct MyCollection *)MyCollectionHandle_value(arg1);
+  *(struct MyCollection **)&jresult = result; 
   return jresult;
 }
 

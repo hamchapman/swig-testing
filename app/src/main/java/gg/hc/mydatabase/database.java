@@ -40,4 +40,27 @@ public class database {
     return new MyDatabase(databaseJNI.MyDatabaseHandle_value(SWIGTYPE_p_MyDatabase.getCPtr(obj)), true);
   }
 
+  public static SWIGTYPE_p_p_MyCollection new_MyCollectionHandle() {
+    long cPtr = databaseJNI.new_MyCollectionHandle();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_MyCollection(cPtr, false);
+  }
+
+  public static SWIGTYPE_p_p_MyCollection copy_MyCollectionHandle(MyCollection value) {
+    long cPtr = databaseJNI.copy_MyCollectionHandle(MyCollection.getCPtr(value), value);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_MyCollection(cPtr, false);
+  }
+
+  public static void delete_MyCollectionHandle(SWIGTYPE_p_p_MyCollection obj) {
+    databaseJNI.delete_MyCollectionHandle(SWIGTYPE_p_p_MyCollection.getCPtr(obj));
+  }
+
+  public static void MyCollectionHandle_assign(SWIGTYPE_p_p_MyCollection obj, MyCollection value) {
+    databaseJNI.MyCollectionHandle_assign(SWIGTYPE_p_p_MyCollection.getCPtr(obj), MyCollection.getCPtr(value), value);
+  }
+
+  public static MyCollection MyCollectionHandle_value(SWIGTYPE_p_p_MyCollection obj) {
+    long cPtr = databaseJNI.MyCollectionHandle_value(SWIGTYPE_p_p_MyCollection.getCPtr(obj));
+    return (cPtr == 0) ? null : new MyCollection(cPtr, false);
+  }
+
 }
